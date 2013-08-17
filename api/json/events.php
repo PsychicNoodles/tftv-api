@@ -34,9 +34,9 @@
                 $item["Time"] = trim(str_replace("START", "", $child -> find("div[style=padding: 8px;]", 0) -> plaintext));
                 $item["Stream"] = trim(str_replace("STREAM", "", $child -> find("td", 1) -> plaintext));
                 $item["Link"] = $child -> find("a", 0) -> href;
-                $item["Title"] = trim($child -> find("a", 0) -> plaintext);
+                $item["Title"] = htmlentities(trim($child -> find("a", 0) -> plaintext));
                 $item["Flag"] = substr($child -> find("span", 0) -> class, 10); //because explode doesn't work on Heroku for some reason
-                $item["Desc"] = trim($child -> find("div.event-desc", 0) -> plaintext);
+                $item["Desc"] = htmlentities(trim($child -> find("div.event-desc", 0) -> plaintext));
                 array_push($evts, $item);
             }
             else
