@@ -10,7 +10,7 @@
         <?php
         try
         {
-            if(!@include "../../scripts/simple_html_dom.php")
+            if(!@include "scripts/simple_html_dom.php")
                 exit("<h1>Internal error, please try again later.</h1>");
         }
         catch(Exception $e)
@@ -32,12 +32,12 @@
             else if(strpos(trim($child -> plaintext), "START") === 0)
             {
                 $item = array(); //split up for easier reading
-                $item["Date"] = explode("\t", trim($date))[0];
+                $item["Date"] = substr(trim($date), 0, strpos(trim($date), "\t")); //because explode doesn't work on Heroku for some reason
                 $item["Time"] = trim(str_replace("START", "", $child -> find("div[style=padding: 8px;]", 0) -> plaintext));
                 $item["Stream"] = trim(str_replace("STREAM", "", $child -> find("td", 1) -> plaintext));
                 $item["Link"] = $child -> find("a", 0) -> href;
                 $item["Title"] = trim($child -> find("a", 0) -> plaintext);
-                $item["Flag"] = explode("-", $child -> find("span", 0) -> class)[1];
+                $item["Flag"] = substr($child, strpos($child, "-") + 1, strlen($child)); //because explode doesn't work on Heroku for some reason
                 $item["Desc"] = trim($child -> find("div.event-desc", 0) -> plaintext);
                 array_push($evts, $item);
             }
