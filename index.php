@@ -5,8 +5,9 @@
         <title></title>
     </head>
     <body>
-        <?php
-        phpinfo();
-        ?>
+        
+        <h1>Links</h1>
+        
+        <p><a href="api/json/events.php">Events</a></p>
     </body>
 </html>
