@@ -10,7 +10,7 @@
         <?php
         try
         {
-            if(!@include "scripts/simple_html_dom.php")
+            if(!@include "../../scripts/simple_html_dom.php")
                 exit("<h1>Internal error, please try again later.</h1>");
         }
         catch(Exception $e)
@@ -37,7 +37,7 @@
                 $item["Stream"] = trim(str_replace("STREAM", "", $child -> find("td", 1) -> plaintext));
                 $item["Link"] = $child -> find("a", 0) -> href;
                 $item["Title"] = trim($child -> find("a", 0) -> plaintext);
-                $item["Flag"] = substr($child, strpos($child, "-") + 1, strlen($child)); //because explode doesn't work on Heroku for some reason
+                $item["Flag"] = substr($child -> find("span", 0) -> class, 10); //because explode doesn't work on Heroku for some reason
                 $item["Desc"] = trim($child -> find("div.event-desc", 0) -> plaintext);
                 array_push($evts, $item);
             }
