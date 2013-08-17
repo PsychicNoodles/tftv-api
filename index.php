@@ -9,6 +9,7 @@
         <h1>Links</h1>
         
         <p><a href="api/json/events.php">Events (JSON)</a></p>
+        <p><a href="api/xml/events.php">Events (XML)</a></p>
         
         <?php ?>
     </body>
