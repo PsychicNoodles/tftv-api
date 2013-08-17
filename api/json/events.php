@@ -4,9 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
     </head>
-    <body>
-        <h1>hello</h1>
-        
+    <body>        
         <?php
         try
         {
@@ -47,7 +45,7 @@
             }
         }
         
-        echo json_encode($evts);
+        echo json_encode($evts, JSON_UNESCAPED_UNICODE);
         ?>
     </body>
 </html>
