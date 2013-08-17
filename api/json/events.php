@@ -6,7 +6,16 @@
     </head>
     <body>
         <?php
-        include "../../scripts/simple_html_dom.php";
+        try
+        {
+            if(!@include "../../scripts/simple_html_dom.php")
+                exit("<h1>Internal error, please try again later.</h1>");
+        }
+        catch(Exception $e)
+        {
+            exit("<h1>Internal error, please try again later.</h1>");
+        }
+        
         
         $page = file_get_html("http://teamfortress.tv/schedule") -> find("table[id=calendar-table]", 0);
         $evts = array();
