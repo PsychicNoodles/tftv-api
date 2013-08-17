@@ -48,7 +48,7 @@
             else if(strpos(trim($child -> plaintext), "START") === 0)
             {
                 $item = array(); //split up for easier reading
-                $item["Date"] = \explode("\t", trim($date))[0];
+//                $item["Date"] = explode("\t", trim($date))[0];
                 $item["Time"] = trim(str_replace("START", "", $child -> find("div[style=padding: 8px;]", 0) -> plaintext));
                 $item["Stream"] = trim(str_replace("STREAM", "", $child -> find("td", 1) -> plaintext));
                 $item["Link"] = $child -> find("a", 0) -> href;
