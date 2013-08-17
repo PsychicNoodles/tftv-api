@@ -45,7 +45,7 @@
             }
         }
         
-        echo json_encode($evts, JSON_UNESCAPED_UNICODE);
+        echo json_encode($evts);
         ?>
     </body>
 </html>
