@@ -16,8 +16,10 @@
             exit("<h1>Internal error, please try again later.</h1>");
         }
         
-        
-        $page = file_get_html("http://teamfortress.tv/schedule") -> find("table[id=calendar-table]", 0);
+        if(isset($_GET["page"]))
+            $page = file_get_html("http://teamfortress.tv/schedule/index/" . ((int) $_GET["page"] > 0 ? (int) $_GET["page"] : 1)) -> find("table[id=calendar-table]", 0);
+        else
+            $page = file_get_html("http://teamfortress.tv/schedule") -> find("table[id=calendar-table]", 0);
         $evts = array();
         $date = "";
                 
