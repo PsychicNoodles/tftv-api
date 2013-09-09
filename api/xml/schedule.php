@@ -1,17 +1,13 @@
 <?php
-try
-{
-    if(!@include "../../scripts/simple_html_dom.php")
-        exit("<h1>Internal error, please try again later.</h1>");
-}
-catch(Exception $e)
-{
+if(!file_exists("../../scripts/simple_html_dom.php"))
     exit("<h1>Internal error, please try again later.</h1>");
-}
 
+require "../../scripts/simple_html_dom.php";
 
-$page = file_get_html("http://teamfortress.tv/schedule") -> find("table[id=calendar-table]", 0);
-$date = "";
+if(isset($_GET["page"]))
+    $page = file_get_html("http://teamfortress.tv/schedule/index/" . ((int) $_GET["page"] > 0 ? (int) $_GET["page"] : 1)) -> find("table[id=calendar-table]", 0);
+else
+    $page = file_get_html("http://teamfortress.tv/schedule") -> find("table[id=calendar-table]", 0);$date = "";
 $xml = new SimpleXMLElement("<events></events>");
 
 foreach($page -> children() as $child)
@@ -25,6 +21,7 @@ foreach($page -> children() as $child)
         $item = $xml -> addChild("entry"); //split up for easier reading
         $item -> addChild("Date", strpos(trim($date), "\t") ? substr(trim($date), 0, strpos(trim($date), "\t")) : trim($date)); //because explode doesn't work on Heroku for some reason
         $item -> addChild("Time", trim(str_replace("START", "", $child -> find("div[style=padding: 8px;]", 0) -> plaintext)));
+        $item -> addChild("Status", trim(str_replace("Upcoming", "", $child -> find("div[style=padding: 8px;]", 1) -> plaintext)));
         $item -> addChild("Stream", trim(str_replace("STREAM", "", $child -> find("td", 1) -> plaintext)));
         $item -> addChild("Link", $child -> find("a", 0) -> href);
         $item -> addChild("Title", htmlentities(trim($child -> find("a", 0) -> plaintext)));
