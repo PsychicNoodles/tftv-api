@@ -24,5 +24,4 @@ $evt["STV"] = trim(str_replace("STV", "", $page -> find("div[style=padding: 8px;
 $evt["Desc"] = trim($page -> find("div[id=event-desc]") -> plaintext);
 
 echo json_encode($evt);
-
 ?>
