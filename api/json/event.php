@@ -18,5 +18,11 @@ $evt["Series"] = htmlentities(trim($page -> find("span.event-meta", 0) -> find("
 $evt["Date"] = htmlentities(trim($page -> find("div[id=event-date]", 0) -> plaintext));
 $evt["Flag"] = htmlentities(substr($page -> find("span[id=event-flag-align]", 0) -> class, 10));
 $evt["Time"] = htmlentities(trim(str_replace("START", "", $page -> find("div.e-upcoming", 0) -> plaintext)));
+$evt["Stream"] = htmlentities(trim(str_replace("STREAM", "", $page -> find("div[style=padding: 8px;]", 3) -> plaintext)));
+$evt["Mumble"] = htmlentities(trim(str_replace("MUMBLE", "", $page -> find("div[style=padding: 8px; border-top: 1px solid #ccc]", 0) -> plaintext)));
+$evt["STV"] = htmlentities(trim(str_replace("STV", "", $page -> find("div[style=padding: 8px; border-top: 1px solid #ccc]", 1) -> plaintext)));
+$evt["Desc"] = htmlentities(trim($page -> find("div[id=event-desc]") -> plaintext));
+
+echo json_encode($evt);
 
 ?>
