@@ -4,24 +4,34 @@ if(!file_exists("../../scripts/simple_html_dom.php"))
 
 require "../../scripts/simple_html_dom.php";
 
-if(!isset($_GET["page"]))
+if(isset($_GET["page"]))
+    $page = file_get_html("http://teamfortress.tv/schedule/index/" . ((int) $_GET["page"] > 0 ? (int) $_GET["page"] : 1)) -> find("table[id=calendar-table]", 0);
+else
+    $page = file_get_html("http://teamfortress.tv/schedule") -> find("table[id=calendar-table]", 0);$date = "";
+$xml = new SimpleXMLElement("<schedule></schedule>");
+
+foreach($page -> children() as $child)
 {
-    http_response_code(400);
-    die("\"page\" GET parameter required");
+    if($child -> plaintext == "")
+    {
+        //do nothing
+    }
+    else if(strpos(trim($child -> plaintext), "START") === 0)
+    {
+        $item = $xml -> addChild("entry"); //split up for easier reading
+        $item -> addChild("Date", strpos(trim($date), "\t") ? substr(trim($date), 0, strpos(trim($date), "\t")) : trim($date)); //because explode doesn't work on Heroku for some reason
+        $item -> addChild("Time", trim(str_replace("START", "", $child -> find("div[style=padding: 8px;]", 0) -> plaintext)));
+        $item -> addChild("Stream", trim(str_replace("STREAM", "", $child -> find("td", 1) -> plaintext)));
+        $item -> addChild("Link", $child -> find("a", 0) -> href);
+        $item -> addChild("Title", htmlentities(trim($child -> find("a", 0) -> plaintext)));
+        $item -> addChild("Flag", substr($child -> find("span", 0) -> class, 10)); //because explode doesn't work on Heroku for some reason
+        $item -> addChild("Desc", htmlentities(trim($child -> find("div.event-desc", 0) -> plaintext)));
+    }
+    else
+    {
+        $date = $child -> plaintext;
+    }
 }
 
-$page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["page"]) -> find("table[id=calendar-table]", 0);
-$xml = new SimpleXMLElement("<event></event>");
-
-$evt -> addChild("Title", trim($page -> find("span[id=event-title]", 0) -> plaintext));
-$evt -> addChild("Series", trim($page -> find("span.event-meta", 0) -> find("b") -> plaintext));
-$evt -> addChild("Date", trim($page -> find("div[id=event-date]", 0) -> plaintext));
-$evt -> addChild("Flag", substr($page -> find("span[id=event-flag-align]", 0) -> class, 10));
-$evt -> addChild("Time", trim(str_replace("START", "", $page -> find("div.e-upcoming", 0) -> plaintext)));
-$evt -> addChild("Stream", trim(str_replace("STREAM", "", $page -> find("div[style=padding: 8px;]", 3) -> plaintext)));
-$evt -> addChild("Mumble", trim(str_replace("MUMBLE", "", $page -> find("div[style=padding: 8px; border-top: 1px solid #ccc]", 0) -> plaintext)));
-$evt -> addChild("STV", trim(str_replace("STV", "", $page -> find("div[style=padding: 8px; border-top: 1px solid #ccc]", 1) -> plaintext)));
-$evt -> addChild("Desc", trim($page -> find("div[id=event-desc]") -> plaintext));
-
-echo $evt -> asXML();
+echo $xml -> asXML();
 ?>
