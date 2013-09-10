@@ -22,7 +22,7 @@ foreach($page -> children() as $child)
         $item = array(); //split up for easier reading
         $item["Date"] = htmlentities(strpos(trim($date), "\t") ? substr(trim($date), 0, strpos(trim($date), "\t")) : trim($date)); //because explode doesn't work on Heroku for some reason
         $item["Time"] = trim(str_replace("START", "", $child -> find("div[style=padding: 8px;]", 0) -> plaintext));
-        $item["Status"] = trim(str_replace("Upcoming", "", $child -> find("div[style=padding: 8px;]", 1) -> plaintext));
+        $item["Status"] = trim(str_replace("UPCOMING", "", $child -> find("div[style=padding: 8px;]", 1) -> plaintext));
         $item["Stream"] = htmlentities(trim(str_replace("STREAM", "", $child -> find("td", 1) -> plaintext)));
         $item["Link"] = htmlentities(str_replace("\\/", "/", $child -> find("a", 0) -> href));
         $item["Title"] = htmlentities(trim($child -> find("a", 0) -> plaintext));
