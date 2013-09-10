@@ -21,7 +21,6 @@ foreach($page -> children() as $child)
         $item = $xml -> addChild("entry"); //split up for easier reading
         $item -> addChild("Date", strpos(trim($date), "\t") ? substr(trim($date), 0, strpos(trim($date), "\t")) : trim($date)); //because explode doesn't work on Heroku for some reason
         $item -> addChild("Time", trim(str_replace("START", "", $child -> find("div[style=padding: 8px;]", 0) -> plaintext)));
-        $item -> addChild("Status", trim(str_replace("UPCOMING", "", $child -> find("div[style=padding: 8px;]", 1) -> plaintext)));
         $item -> addChild("Stream", trim(str_replace("STREAM", "", $child -> find("td", 1) -> plaintext)));
         $item -> addChild("Link", $child -> find("a", 0) -> href);
         $item -> addChild("Title", htmlentities(trim($child -> find("a", 0) -> plaintext)));
