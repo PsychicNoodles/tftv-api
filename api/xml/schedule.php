@@ -8,7 +8,7 @@ if(isset($_GET["page"]))
     $page = file_get_html("http://teamfortress.tv/schedule/index/" . ((int) $_GET["page"] > 0 ? (int) $_GET["page"] : 1)) -> find("table[id=calendar-table]", 0);
 else
     $page = file_get_html("http://teamfortress.tv/schedule") -> find("table[id=calendar-table]", 0);$date = "";
-$xml = new SimpleXMLElement("<events></events>");
+$xml = new SimpleXMLElement("<schedule></schedule>");
 
 foreach($page -> children() as $child)
 {
