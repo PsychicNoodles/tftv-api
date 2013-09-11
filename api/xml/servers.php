@@ -20,12 +20,12 @@ foreach($page -> children() as $child)
             else
             {
                 $item = $xml -> addChild("entry");
-                $item["Type"] = $servertype;
-                $item["Link"] = $child -> find("a", 0) -> href;
-                $item["Title"] = trim($child -> find("a", 0) -> plaintext);
-                $item["Players"] = trim($child -> find("td", 1) -> plaintext);
-                $item["Map"] = trim($child -> find("td", 2) -> plaintext);
-                $item["Updated"] = trim($child -> find("td", 3) -> plaintext);
+                $item -> addChild("Type", $servertype);
+                $item -> addChild("Link", $child -> find("a", 0) -> href);
+                $item -> addChild("Title", trim($child -> find("a", 0) -> plaintext));
+                $item -> addChild("Players", trim($child -> find("td", 1) -> plaintext));
+                $item -> addChild("Map", trim($child -> find("td", 2) -> plaintext));
+                $item -> addChild("Updated", trim($child -> find("td", 3) -> plaintext));
             }
         }
     }
