@@ -18,5 +18,5 @@ foreach($page -> children as $child)
     $item -> addChild("Desc", trim(str_replace("Description", "", str_replace("»", "", $child -> find("div[style=padding: 6px; padding-left: 0; padding-right: 18px;]", 1) -> plaintext))));
 }
 
-echo $stms -> asXML();
+echo $xml -> asXML();
 ?>
