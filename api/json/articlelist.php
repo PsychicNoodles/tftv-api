@@ -6,13 +6,13 @@ require "../../scripts/simple_html_dom.php";
 
 header("Content-Type: application/json");
 
-$page = file_get_html("http://teamfortress.tv/articles") -> find("table.list-table");
+$page = file_get_html("http://teamfortress.tv/articles") -> find("table.list-table", 0);
 
 $arts = array();
 
 foreach($page -> children() as $child)
 {
-    if(!$page -> find("th", 0))
+    if(!$child -> find("th", 0))
     {
         $item = array();
         $item["Link"] = $child -> find("a", 0) -> href;
