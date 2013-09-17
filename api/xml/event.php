@@ -10,6 +10,8 @@ if(!isset($_GET["page"]))
     die("\"page\" GET parameter required");
 }
 
+header("Content-Type: application/xml");
+
 $page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["page"]) -> find("table[id=calendar-table]", 0);
 $evt = new SimpleXMLElement("<event></event>");
 

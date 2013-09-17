@@ -4,6 +4,8 @@ if(!file_exists("../../scripts/simple_html_dom.php"))
 
 require "../../scripts/simple_html_dom.php";
 
+header("Content-Type: application/xml");
+
 if(isset($_GET["page"]))
     $page = file_get_html("http://teamfortress.tv/schedule/index/" . ((int) $_GET["page"] > 0 ? (int) $_GET["page"] : 1)) -> find("table[id=calendar-table]", 0);
 else

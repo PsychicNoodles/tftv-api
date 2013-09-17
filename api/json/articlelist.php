@@ -4,6 +4,8 @@ if(!file_exists("../../scripts/simple_html_dom.php"))
 
 require "../../scripts/simple_html_dom.php";
 
+header("Content-Type: application/json");
+
 $page = file_get_html("http://teamfortress.tv/articles") -> find("table.list-table");
 
 $arts = array();

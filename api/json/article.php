@@ -10,6 +10,8 @@ if(!isset($_GET["page"]))
     die("\"page\" GET parameter required");
 }
 
+header("Content-Type: application/json");
+
 $page = file_get_html("http://teamfortress.tv/articles/view/" . $_GET["page"]) -> find("div[id=article-container]", 0);
 $art = array();
 
