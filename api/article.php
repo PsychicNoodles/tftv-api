@@ -1,8 +1,8 @@
 <?php
-if(!file_exists("../../scripts/simple_html_dom.php"))
+if(!file_exists("../scripts/simple_html_dom.php"))
     exit("<h1>Internal error, please try again later.</h1>");
 
-require "../../scripts/simple_html_dom.php";
+require "../scripts/simple_html_dom.php";
 
 if(!isset($_GET["page"]))
 {
