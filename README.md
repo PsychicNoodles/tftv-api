@@ -1,4 +1,4 @@
 TFTV-Api
 ========
 
-A RESTful JSON and XML api for teamfortress.tv.
+A RESTful JSON api for teamfortress.tv.
