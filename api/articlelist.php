@@ -19,10 +19,10 @@ foreach($page -> children() as $child)
         $item["Link"] = $child -> find("a", 0) -> href;
         $item["Author"] = trim(str_replace($item["Title"], "", str_replace("by ", "", $child -> find("td", 0) -> plaintext)));
         $item["Published"] = trim($child -> find("td", 1) -> plaintext);
-        $item["Category Link"] = $child -> find("a", 1) -> href;
         $item["Category Title"] = trim($child -> find("a", 1) -> plaintext);
-        $item["Series Link"] = $child -> find("a", 2) -> href == "/articles/series/" ? null : $child -> find("a", 2) -> href;
+        $item["Category Link"] = $child -> find("a", 1) -> href;
         $item["Series Title"] = $item["Series Link"] ? trim($child -> find("a", 2) -> plaintext) : null;
+        $item["Series Link"] = $child -> find("a", 2) -> href == "/articles/series/" ? null : $child -> find("a", 2) -> href;
         array_push($arts, $item);
     }
 }
