@@ -26,5 +26,5 @@ $art["Time"] = trim(substr($datetime, strpos($datetime, "at") + 3, 9));
 $art["Body Raw"] = htmlentities(str_replace($page -> find("div[id=article-body]", 0) -> outertext, "", $page -> find("div[id=article-body]", 0) -> innertext), ENT_QUOTES);
 $art["Body Plaintext"] = htmlentities($page -> find("div[id=article-body]", 0) -> plaintext);
 
-echo json_encode($art);
+echo str_replace("\\/", "/", json_encode($art));
 ?>

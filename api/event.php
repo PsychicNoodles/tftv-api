@@ -43,5 +43,5 @@ $evt["Mumble"] = trim(str_replace("MUMBLE", "", $page -> find("div[style=padding
 $evt["STV"] = trim(str_replace("STV", "", $page -> find("div[style=padding: 8px; border-top: 1px solid #ccc;]", 3) -> plaintext));
 $evt["Desc"] = trim($page -> find("div[id=event-desc]", 0) -> plaintext);
 
-echo json_encode($evt);
+echo str_replace("\\/", "/", json_encode($evt));
 ?>

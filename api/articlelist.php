@@ -27,5 +27,5 @@ foreach($page -> children() as $child)
     }
 }
 
-echo json_encode($arts);
+echo str_replace("\\/", "/", json_encode($arts));
 ?>

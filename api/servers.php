@@ -41,5 +41,5 @@ foreach($page -> children() as $child)
     }
 }
 
-echo json_encode($svrs);
+echo str_replace("\\/", "/", json_encode($svrs));
 ?>
