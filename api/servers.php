@@ -23,9 +23,9 @@ foreach($page -> children() as $child)
             else
             {
                 $item = array();
-                $item["Type"] = $servertype;
-                $item["Link"] = $serv -> find("a", 0) -> href;
                 $item["Title"] = trim($serv -> find("a", 0) -> plaintext);
+                $item["Link"] = $serv -> find("a", 0) -> href;
+                $item["Type"] = $servertype;
                 $item["Players"] = trim($serv -> find("td", 1) -> plaintext);
                 $item["Map"] = trim($serv -> find("td", 2) -> plaintext);
                 $item["Updated"] = trim($serv -> find("td", 3) -> plaintext);
