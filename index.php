@@ -15,7 +15,6 @@
         <p><a href="api/servers.php">Servers</a></p>
         <p><a href="api/streams.php">Streams</a></p>
         <p><a href="api/forumindex.php">Forum Index</a></p>
-        
-        <?php ?>
+        <p><a href="api/subforum.php?sub=tf2">Subforum (example page: http://teamfortress.tv/forum/tf2/)</a></p>
     </body>
 </html>
