@@ -12,7 +12,7 @@ if(!isset($_GET["sub"]))
 
 header("Content-Type: application/json");
 
-$page = file_get_html("http://teamfortress.tv/forum/" . $_GET["sub"]) -> find("table.list-table", 0);
+$page = file_get_html("http://teamfortress.tv/forum/" . (is_numeric($_GET["sub"]) ? "category/" . $_GET["sub"] : $_GET["sub"]) . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? "/" . $_GET["page"] : "")) -> find("table.list-table", 0);
 $psts = array();
 
 foreach($page -> children() as $child)
