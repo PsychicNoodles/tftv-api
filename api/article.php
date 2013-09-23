@@ -8,12 +8,10 @@ if(!isset($_GET["art"]))
 {
     header("HTTP/1.0 404 Not Found");
     header("Status: 404 Not Found");
-    die("\"page\" GET parameter required");
+    die("\"art\" GET parameter required");
 }
 
-print_r($_GET);
-
-//header("Content-Type: application/json");
+header("Content-Type: application/json");
 
 $page = file_get_html("http://teamfortress.tv/articles/view/" . $_GET["art"] . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? $_GET["page"] : ""));
 $artpage = $page -> find("div[id=article-container]", 0);
