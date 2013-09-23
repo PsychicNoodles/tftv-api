@@ -6,7 +6,7 @@ require "../scripts/simple_html_dom.php";
 
 header("Content-Type: application/json");
 
-$page = file_get_html("http://teamfortress.tv/articles") -> find("table.list-table", 0);
+$page = file_get_html("http://teamfortress.tv/articles" . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? "/" . $_GET["page"] : "")) -> find("table.list-table", 0);
 
 $arts = array();
 
