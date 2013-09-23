@@ -6,14 +6,14 @@ require "../scripts/simple_html_dom.php";
 
 if(!isset($_GET["page"]))
 {
-    http_response_code(400);
+    header("HTTP/1.0 404 Not Found");
+    header("Status: 404 Not Found");
     die("\"page\" GET parameter required");
 }
 
 header("Content-Type: application/json");
 
 $page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["page"]) -> find("table[id=calendar-table]", 0);
-//echo $page;
 $evt = array();
 
 $evt["Title"] = trim($page -> find("span[id=event-title]", 0) -> plaintext);

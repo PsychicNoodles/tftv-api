@@ -6,7 +6,8 @@ require "../scripts/simple_html_dom.php";
 
 if(!isset($_GET["sub"]))
 {
-    http_response_code(400);
+    header("HTTP/1.0 404 Not Found");
+    header("Status: 404 Not Found");
     die("\"sub\" GET parameter required");
 }
 
