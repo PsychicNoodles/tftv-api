@@ -11,7 +11,9 @@ if(!isset($_GET["art"]))
     die("\"page\" GET parameter required");
 }
 
-header("Content-Type: application/json");
+print_r($_GET);
+
+//header("Content-Type: application/json");
 
 $page = file_get_html("http://teamfortress.tv/articles/view/" . $_GET["art"] . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? $_GET["page"] : ""));
 $artpage = $page -> find("div[id=article-container]", 0);
