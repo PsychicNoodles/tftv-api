@@ -58,5 +58,5 @@ foreach($cmtspage -> children() as $child)
 
 $art["Comments"] = $cmts;
 
-echo str_replace("\\/", "/", json_encode($art));
+echo json_encode($art);
 ?>

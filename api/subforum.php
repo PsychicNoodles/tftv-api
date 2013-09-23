@@ -37,5 +37,5 @@ foreach($page -> children() as $child)
     }
 }
 
-echo str_replace("\\/", "/", json_encode($psts));
+echo json_encode($psts);
 ?>

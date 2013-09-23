@@ -21,5 +21,5 @@ foreach($page -> children as $child)
     array_push($stms, $item);
 }
 
-echo str_replace("\\/", "/", json_encode($stms));
+echo json_encode($stms);
 ?>
