@@ -20,10 +20,10 @@ $art = array();
 $cmts = array();
 
 $art["Title"] = trim($artpage -> find("div[id=article-title]", 0) -> plaintext);
-$art["Author Link"] = $artpage -> find("a", 0) -> href;
 $art["Author Name"] = trim($artpage -> find("a", 0) -> plaintext);
-$art["Category Link"] = $artpage -> find("a", 1) -> href;
+$art["Author Link"] = $artpage -> find("a", 0) -> href;
 $art["Category Name"] = trim($artpage -> find("a", 1) -> plaintext);
+$art["Category Link"] = $artpage -> find("a", 1) -> href;
 $datetime = trim(str_replace("Posted by", "", str_replace("on", "", str_replace("— Category:", "", str_replace($art["Category Name"], "", str_replace($art["Author Name"], "", $artpage -> find("div[id=article-sub-title]", 0) -> plaintext))))));
 $art["Date"] = trim(substr($datetime, 0, strpos($datetime, "at")));
 $art["Time"] = trim(substr($datetime, strpos($datetime, "at") + 3, 9));
