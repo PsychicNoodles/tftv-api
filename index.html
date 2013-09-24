@@ -34,7 +34,7 @@
         <h4>
 <a name="tftv-api" class="anchor" href="#tftv-api"><span class="octicon octicon-link"></span></a>TFTV-Api</h4>
 
-<p>A RESTful JSON api for content at TeamFortress.tv. This PHP program scrapes tf.tv HTML and supplies it in an easy to process format, allowing easier creation of applications and scripts that require information from the site.</p>
+<p>A RESTful JSON api for content at TeamFortress.tv, available at <a href="http://tftv-api.herokuapp.com"><strong>tftv-api.herokuapp.com</strong></a>. This PHP program scrapes tf.tv HTML and supplies it in an easy to process format, allowing easier creation of applications and scripts that require information from the site.</p>
 
 <p>All pages respond to <code>GET</code> requests and should have response code <code>200</code> and <code>Content-Type: application/json</code> on all successful requests. If there is an error loading a page (for example, asking for a page that does not exist) then the response code will be <code>404</code> and an appropriate textual explanation will be given in the body. Every page, with the exception of <code>/api/forumindex.php</code>, <code>/api/servers.php</code>, and <code>/api/streams.php</code> take an optional <code>page</code> parameter (must be numeric or else it will be ignored) that corresponds to the page of the list (<code>/api/articlelist.php</code> and <code>/api/schedule.php</code>) or the page of the comments.</p>
 
