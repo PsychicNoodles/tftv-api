@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="TFTV-Api : A RESTful JSON api for teamfortress.tv." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>TFTV-Api</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/PsychicNoodles/TFTV-Api">View on GitHub</a>
+
+          <h1 id="project_title">TFTV-Api</h1>
+          <h2 id="project_tagline">A RESTful JSON api for teamfortress.tv.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/PsychicNoodles/TFTV-Api/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/PsychicNoodles/TFTV-Api/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h4>
+<a name="tftv-api" class="anchor" href="#tftv-api"><span class="octicon octicon-link"></span></a>TFTV-Api</h4>
+
+<p>A RESTful JSON api for content at TeamFortress.tv. This PHP program scrapes tf.tv HTML and supplies it in an easy to process format, allowing easier creation of applications and scripts that require information from the site.</p>
+
+<p>All pages respond to <code>GET</code> requests and should have response code <code>200</code> and <code>Content-Type: application/json</code> on all successful requests. If there is an error loading a page (for example, asking for a page that does not exist) then the response code will be <code>404</code> and an appropriate textual explanation will be given in the body. Every page, with the exception of <code>/api/forumindex.php</code>, <code>/api/servers.php</code>, and <code>/api/streams.php</code> take an optional <code>page</code> parameter (must be numeric or else it will be ignored) that corresponds to the page of the list (<code>/api/articlelist.php</code> and <code>/api/schedule.php</code>) or the page of the comments.</p>
+
+<h3>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h3>
+
+<h2>
+<a name="articles" class="anchor" href="#articles"><span class="octicon octicon-link"></span></a>Articles</h2>
+
+<pre><code>/api/articlelist.php[?page=num]
+</code></pre>
+
+<p>Lists articles on the given page (page 1 by default), as found at <a href="http://teamfortress.tv/articles/%5Bnum%5D">http://teamfortress.tv/articles/[num]</a>. Provides title, link, author, published (date), category name and link, and series name and link (null is there is none).</p>
+
+<pre><code>/api/article.php?art=url[&amp;page=num]
+</code></pre>
+
+<p>Parses content for a specific article denoted by <code>art</code>, which should be the part of the URL after teamfortress.tv/articles/view/ (i.e. <a href="http://tftv-api.herokuapp.com/api/article.php?art=194-official-ugc-platinum-season-11-predictions-power-rankings-and-player-rankings">194-official-ugc-platinum-season-11-predictions-power-rankings-and-player-rankings</a> for <a href="http://teamfortress.tv/articles/view/194-official-ugc-platinum-season-11-predictions-power-rankings-and-player-rankings">http://teamfortress.tv/articles/view/194-official-ugc-platinum-season-11-predictions-power-rankings-and-player-rankings</a>). Provides title, author name and profile link, category name and link, publish date, publish time, the body as raw (actual escaped html content) and plaintext (without html elements), and the comments (see the documentation for <code>/api/thread.php</code> for more information).</p>
+
+<h2>
+<a name="events" class="anchor" href="#events"><span class="octicon octicon-link"></span></a>Events</h2>
+
+<pre><code>/api/schedule.php[?page=num]
+</code></pre>
+
+<p>Lists events on the given page (page 1 by default), as found at <a href="http://teamfortress.tv/schedule/%5Bnum%5D">http://teamfortress.tv/schedule/[num]</a>. Provides title, link, description, date, time, stream, and flag.</p>
+
+<pre><code>/api/event.php?evt=url[&amp;page=num]
+</code></pre>
+
+<p>Parses content for a specific event denoted by <code>evt</code>, which should be the part of the URL after teamfortress.tv/schedule/event/ (i.e. <a href="http://tftv-api.herokuapp.com/api/article.php?art=349-etf2l-metalworks-one-night-cup">349-etf2l-metalworks-one-night-cup</a> for <a href="http://teamfortress.tv/articles/view/349-etf2l-metalworks-one-night-cup">http://teamfortress.tv/articles/view/349-etf2l-metalworks-one-night-cup</a>). Provides title, series (null if there is none), region, time, date, stream title and link, mumble, STV, description, and the comments (see the documentation for <code>/api/thread.php</code> for more information).</p>
+
+<h2>
+<a name="forum" class="anchor" href="#forum"><span class="octicon octicon-link"></span></a>Forum</h2>
+
+<pre><code>/api/forumindex.php
+</code></pre>
+
+<p>Lists the forum categories, as found at <a href="http://teamfortress.tv/forum/">http://teamfortress.tv/forum/</a>. Provides title, link, threads, posts, and last post title, link, author, and publish time/date.</p>
+
+<pre><code>/api/subforum.php?sub=url[&amp;page=num]
+</code></pre>
+
+<p>Lists the posts in a specific subforum, as found at <a href="http://teamfortress.tv/forum/%5Burl%5D">http://teamfortress.tv/forum/[url]</a> or <a href="http://teamfortress.tv/forum/category/%5Burl%5D">http://teamfortress.tv/forum/category/[url]</a> (depending on whether the <code>sub</code> parameter is numeric or not). Provides title, link, pages, author, frags, posts, last post link, last post publish time/date, last post author, and status (Stickied, Locked, or null).</p>
+
+<pre><code>/api/thread.php?thr=url[&amp;page=num]
+</code></pre>
+
+<p>Parses content for a specific thread denoted by <code>thr</code>, which should be the part of the URL after teamfortress.tv/forum/thread/ (i.e.<a href="http://tftv-api.herokuapp.com/api/thread.php?thr=12566-its-coming">12566-its-coming</a> for <a href="http://teamfortress.tv/forum/thread/12566-its-coming">http://teamfortress.tv/forum/thread/12566-its-coming</a>). Provides ID, number in the thread, author name and profile link, flag, stars, frags, publish time/date, edited (null if not edited), and the body as raw (actual escaped html content) and plaintext (without html elements).</p>
+
+<h2>
+<a name="servers" class="anchor" href="#servers"><span class="octicon octicon-link"></span></a>Servers</h2>
+
+<pre><code>/api/server.php[?type=str]
+</code></pre>
+
+<p>Lists the servers recognized by tf.tv, as found at <a href="http://teamfortress.tv/servers">http://teamfortress.tv/servers</a>. Provides title, link (Steam connect URI), type, players, map, and updated. The optional <code>type</code> parameter case-insensitive limits the results to the type specified (i.e. MGE, Pub, Surf), if not found then an empty JSON array is returned.</p>
+
+<h2>
+<a name="streams" class="anchor" href="#streams"><span class="octicon octicon-link"></span></a>Streams</h2>
+
+<pre><code>/api/streams.php
+</code></pre>
+
+<p>Lists the streams recognized by tf.tv, as found at <a href="http://teamfortress.tv/streams">http://teamfortress.tv/streams</a>. Provides preview picture link, streamer, viewers, link, title, and description.</p>
+
+<h3>
+<a name="other-stuff" class="anchor" href="#other-stuff"><span class="octicon octicon-link"></span></a>Other stuff</h3>
+
+<p>This project is the work of a single coder in his free time. If you find any bugs or error, <strong>please do not hesitate to let me know!</strong> You can contact me at <a href="mailto:mattori.birnbaum@gmail.com">mattori.birnbaum@gmail.com</a> or on Steam at my username, <a href="http://steamcommunity.com/id/PsychicNoodles">PsychicNoodles</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">TFTV-Api maintained by <a href="https://github.com/PsychicNoodles">PsychicNoodles</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
