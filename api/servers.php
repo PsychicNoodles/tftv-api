@@ -47,5 +47,8 @@ foreach($page -> children() as $child)
     }
 }
 
+if(isset($_GET["type"]))
+    die(json_encode(array()));
+
 echo json_encode($svrs);
 ?>
