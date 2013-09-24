@@ -4,14 +4,14 @@ if(!file_exists("../scripts/simple_html_dom.php"))
 
 require "../scripts/simple_html_dom.php";
 
-if(!isset($_GET["page"]))
+if(!isset($_GET["evt"]))
 {
     header("HTTP/1.0 404 Not Found");
     header("Status: 404 Not Found");
-    die("\"page\" GET parameter required");
+    die("\"evt\" GET parameter required");
 }
 
-$page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["page"]);
+$page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["evt"] . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? $_GET["page"] : ""));
 if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
 {
     header("HTTP/1.0 404 Not Found");
