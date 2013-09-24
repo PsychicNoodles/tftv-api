@@ -29,15 +29,16 @@ $cmts = array();
 $evt["Title"] = trim($page -> find("span[id=event-title]", 0) -> plaintext);
 if(strpos($evtpage -> find("span.event-meta", 0) -> plaintext, "Series") == 0)
 {
+    $evt["Series"] = null;
     $evt["Region"] = trim($evtpage -> find("span.event-meta", 0) -> find("i", 0) -> plaintext);
     if(($evtpage -> find("div.e-upcoming", 0) !== NULL))
         $evt["Time"] = trim(str_replace("START", "", $evtpage -> find("div.e-upcoming", 0) -> plaintext));
     else
         $evt["Time"] = trim(str_replace("START", "", $evtpage -> find("div.e-completed", 0) -> plaintext));
-    $evt["Series"] = null;
 }
 else
 {
+    $evt["Series"] = trim(str_replace("Series:", "", $evtpage -> find("span.event-meta", 0) -> plaintext));
     $evt["Region"] = trim($evtpage -> find("span.event-meta", 1) -> find("i", 0) -> plaintext);
     if(($evtpage -> find("div.e-upcoming", 0) !== NULL))
         $evt["Time"] = trim(str_replace("START", "", $evtpage -> find("div.e-upcoming", 0) -> plaintext));
