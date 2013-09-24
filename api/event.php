@@ -11,7 +11,7 @@ if(!isset($_GET["evt"]))
     die("\"evt\" GET parameter required");
 }
 
-$page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["evt"] . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? $_GET["page"] : ""));
+$page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["evt"] . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? "/" . $_GET["page"] : ""));
 if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
 {
     header("HTTP/1.0 404 Not Found");
