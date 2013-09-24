@@ -11,9 +11,16 @@ if(!isset($_GET["art"]))
     die("\"art\" GET parameter required");
 }
 
+$page = file_get_html("http://teamfortress.tv/articles/view/" . $_GET["art"] . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? $_GET["page"] : ""));
+if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
+{
+    header("HTTP/1.0 404 Not Found");
+    header("Status: 404 Not Found");
+    die("page not found");
+}
+
 header("Content-Type: application/json");
 
-$page = file_get_html("http://teamfortress.tv/articles/view/" . $_GET["art"] . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? $_GET["page"] : ""));
 $artpage = $page -> find("div[id=article-container]", 0);
 $cmtspage = $page -> find("div[id=thread-container]", 0);
 $art = array();

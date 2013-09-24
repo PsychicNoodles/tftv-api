@@ -4,12 +4,19 @@ if(!file_exists("../scripts/simple_html_dom.php"))
 
 require "../scripts/simple_html_dom.php";
 
-header("Content-Type: application/json");
-
 if(isset($_GET["page"]))
     $page = file_get_html("http://teamfortress.tv/schedule/index/" . ((int) $_GET["page"] > 0 ? (int) $_GET["page"] : 1)) -> find("table[id=calendar-table]", 0);
 else
     $page = file_get_html("http://teamfortress.tv/schedule") -> find("table[id=calendar-table]", 0);
+if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
+{
+    header("HTTP/1.0 404 Not Found");
+    header("Status: 404 Not Found");
+    die("page not found");
+}
+
+header("Content-Type: application/json");
+
 $evts = array();
 $date = "";
 

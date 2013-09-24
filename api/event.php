@@ -11,9 +11,16 @@ if(!isset($_GET["page"]))
     die("\"page\" GET parameter required");
 }
 
+$page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["page"]) -> find("table[id=calendar-table]", 0);
+if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
+{
+    header("HTTP/1.0 404 Not Found");
+    header("Status: 404 Not Found");
+    die("page not found");
+}
+
 header("Content-Type: application/json");
 
-$page = file_get_html("http://teamfortress.tv/schedule/event/" . $_GET["page"]) -> find("table[id=calendar-table]", 0);
 $evt = array();
 
 $evt["Title"] = trim($page -> find("span[id=event-title]", 0) -> plaintext);

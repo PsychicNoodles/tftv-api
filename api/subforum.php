@@ -11,9 +11,16 @@ if(!isset($_GET["sub"]))
     die("\"sub\" GET parameter required");
 }
 
+$page = file_get_html("http://teamfortress.tv/forum/" . (is_numeric($_GET["sub"]) ? "category/" . $_GET["sub"] : $_GET["sub"]) . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? "/" . $_GET["page"] : "")) -> find("table.list-table", 0);
+if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
+{
+    header("HTTP/1.0 404 Not Found");
+    header("Status: 404 Not Found");
+    die("page not found");
+}
+
 header("Content-Type: application/json");
 
-$page = file_get_html("http://teamfortress.tv/forum/" . (is_numeric($_GET["sub"]) ? "category/" . $_GET["sub"] : $_GET["sub"]) . (isset($_GET["page"]) && is_numeric($_GET["page"]) ? "/" . $_GET["page"] : "")) -> find("table.list-table", 0);
 $psts = array();
 
 foreach($page -> children() as $child)

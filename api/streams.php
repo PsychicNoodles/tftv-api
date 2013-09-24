@@ -4,9 +4,16 @@ if(!file_exists("../scripts/simple_html_dom.php"))
 
 require "../scripts/simple_html_dom.php";
 
+$page = file_get_html("http://teamfortress.tv/streams") -> find("ul[id=stream-list]", 0);
+if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
+{
+    header("HTTP/1.0 404 Not Found");
+    header("Status: 404 Not Found");
+    die("page not found");
+}
+
 header("Content-Type: application/json");
 
-$page = file_get_html("http://teamfortress.tv/streams") -> find("ul[id=stream-list]", 0);
 $stms = array();
 
 foreach($page -> children as $child)
