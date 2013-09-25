@@ -40,6 +40,11 @@ foreach($page -> children() as $child)
                     if(strcasecmp($servertype, $_GET["type"]) === 0 || strcasecmp(substr($servertype, 0, strpos($servertype, " ")), $_GET["type"]) === 0)
                         echo json_encode($item);
                 }
+                elseif(isset($_GET["server"]))
+                {
+                    if(strcasecmp($item["Title"], $_GET["server"]) === 0)
+                        echo json_encode($item);
+                }
                 else
                     array_push($svrs, $item);
             }
@@ -47,7 +52,7 @@ foreach($page -> children() as $child)
     }
 }
 
-if(isset($_GET["type"]))
+if(isset($_GET["type"]) || isset($_GET["server"]))
     die(json_encode(array()));
 
 echo json_encode($svrs);
