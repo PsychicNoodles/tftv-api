@@ -25,8 +25,17 @@ foreach($page -> children as $child)
     $item["Link"] = trim($child -> find("a[style=display: inline-block; float: right; color: #666;]", 0) -> href);
     $item["Title"] = trim(str_replace("Title", "", str_replace("&raquo;", "", $child -> find("div[style=padding: 6px; padding-left: 0; padding-right: 18px;]", 0) -> plaintext)));
     $item["Desc"] = $child -> find("div[style=padding: 3px; padding-left: 0; padding-right: 18px;]", 0) !== NULL ? trim(str_replace("Description", "", str_replace("&raquo;", "", $child -> find("div[style=padding: 3px; padding-left: 0; padding-right: 18px;]", 0) -> plaintext))) : NULL;
-    array_push($stms, $item);
+    if(isset($_GET["streamer"]))
+    {
+        if(strcasecmp($item["Streamer"], $_GET["streamer"]) === 0)
+            echo json_encode($item);
+    }
+    else
+        array_push($stms, $item);
 }
+
+if(isset($_GET["streamer"]))
+    die(json_encode(array()));
 
 echo json_encode($stms);
 ?>
