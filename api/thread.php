@@ -11,7 +11,7 @@ if(!isset($_GET["thr"]))
     die("\"post\" GET parameter required");
 }
 
-$page = file_get_html("http://teamfortress.tv/forum/thread/" . $_GET["thr"] . (isset($_GET["page"]) && is_numeric($_GET["page"])? $_GET["page"] : "" )) -> find("div[id=thread-container]", 0);
+$page = file_get_html("http://teamfortress.tv/forum/thread/" . $_GET["thr"] . (isset($_GET["page"]) && is_numeric($_GET["page"])? $_GET["page"] : "" ));
 if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
 {
     header("HTTP/1.0 404 Not Found");
@@ -22,6 +22,10 @@ if($page -> find("title", 0) -> plaintext == "Page Cannot be Displayed")
 header("Content-Type: application/json");
 
 $psts = array();
+
+$psts["Pages"] = trim(substr($page -> find("div.action-bar-pages", 0) -> plaintext, strpos($page -> find("div.action-bar-pages", 0) -> plaintext, "of") + 3, strpos($page -> find("div.action-bar-pages", 0) -> plaintext, "&raquo;") - 13));
+
+$page = $page -> find("div[id=thread-container]", 0);
 
 foreach($page -> children() as $child)
 {
