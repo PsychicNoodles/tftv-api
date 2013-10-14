@@ -29,6 +29,8 @@ switch(strtolower($_GET["type"]))
         $type = "/articles/view/";
         break;
     case("forum"):
+        ;
+    case("thread"):
         $type = "/forum/thread/";
         break;
     case("schedule"):
