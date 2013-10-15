@@ -35,7 +35,7 @@ $datetime = trim(str_replace("Posted by", "", str_replace("on", "", str_replace(
 $art["Date"] = trim(substr($datetime, 0, strpos($datetime, "at")));
 $art["Time"] = trim(substr($datetime, strpos($datetime, "at") + 3, 9));
 $art["Body Raw"] = htmlentities(str_replace($artpage -> find("div[id=article-body]", 0) -> outertext, "", $artpage -> find("div[id=article-body]", 0) -> innertext), ENT_QUOTES, "UTF-8");
-$art["Body Plaintext"] = htmlentities($artpage -> find("div[id=article-body]", 0) -> plaintext, $encoding = "UTF-8");
+$art["Body Plaintext"] = htmlentities($artpage -> find("div[id=article-body]", 0) -> plaintext, ENT_QUOTES, "UTF-8");
 
 foreach($cmtspage -> children() as $child)
 {
