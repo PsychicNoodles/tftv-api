@@ -49,8 +49,8 @@ foreach($page -> children() as $child)
         $item["Published"] = trim(str_replace("Posted", "", substr($child -> find("div.post-footer", 0) -> plaintext, 0, strrpos($child -> find("div.post-footer", 0) -> plaintext, "&sdot;"))));
         $item["Edited"] = trim(str_replace("Posted", "", str_replace("&sdot;", "", str_replace($item["Published"], "", $child -> find("div.post-footer", 0) -> plaintext))));
     }
-    $item["Body Raw"] = trim(htmlentities(str_replace($child -> find("div.post-body", 0) -> outertext, "", $child -> find("div.post-body", 0) -> plaintext)));
-    $item["Body Plaintext"] = trim(htmlentities($child -> find("div.post-body", 0) -> plaintext));
+    $item["Body Raw"] = trim(htmlentities(str_replace($child -> find("div.post-body", 0) -> outertext, "", $child -> find("div.post-body", 0) -> plaintext), ENT_QUOTES, "UTF-8"));
+    $item["Body Plaintext"] = trim(htmlentities($child -> find("div.post-body", 0) -> plaintext, ENT_QUOTES, "UTF-8"));
     array_push($psts, $item);
 }
 
