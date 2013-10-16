@@ -63,6 +63,7 @@ for($i = 1; ; $i++)
         if(substr($child -> id, 8) == $_GET["id"])
         {
             $item = array();
+            $item["Title"] = trim($page -> find("title", 0) -> plaintext);
             $item["ID"] = substr($child -> id, 8);
             $item["Number"] = trim($child -> find("span.post-num", 0) -> plaintext);
             $item["Author Name"] = trim($child -> find("a", 2) -> plaintext);
