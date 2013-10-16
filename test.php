@@ -18,5 +18,6 @@
         <p><a href="api/subforum.php?sub=tf2">Subforum (example page: http://teamfortress.tv/forum/tf2/)</a></p>
         <p><a href="api/thread.php?thr=12566-its-coming">Forum Thread (example page: http://teamfortress.tv/forum/thread/12566-its-coming)</a></p>
         <p><a href="api/comment.php?type=article&path=196-introducing-tftv&id=203505">Comment (example page: http://teamfortress.tv/articles/view/196-introducing-tftv#post-2)</a></p>
+        <p><a href="api/commentlist.php?type=event&path=376-esea-invite-classic-mixup-vs-watch-this">Comment List (example page: http://teamfortress.tv/schedule/event/376-esea-invite-classic-mixup-vs-watch-this)</a></p>
     </body>
 </html>
