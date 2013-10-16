@@ -34,8 +34,8 @@ $art["Category Link"] = $artpage -> find("a", 1) -> href;
 $datetime = trim(str_replace("Posted by", "", str_replace("on", "", str_replace("— Category:", "", str_replace($art["Category Name"], "", str_replace($art["Author Name"], "", $artpage -> find("div[id=article-sub-title]", 0) -> plaintext))))));
 $art["Date"] = trim(substr($datetime, 0, strpos($datetime, "at")));
 $art["Time"] = trim(substr($datetime, strpos($datetime, "at") + 3, 9));
-$art["Body Raw"] = htmlentities(str_replace($artpage -> find("div[id=article-body]", 0) -> outertext, "", $artpage -> find("div[id=article-body]", 0) -> innertext), ENT_QUOTES);
-$art["Body Plaintext"] = htmlentities($artpage -> find("div[id=article-body]", 0) -> plaintext);
+$art["Body Raw"] = htmlentities(str_replace($artpage -> find("div[id=article-body]", 0) -> outertext, "", $artpage -> find("div[id=article-body]", 0) -> innertext), ENT_QUOTES, "UTF-8");
+$art["Body Plaintext"] = htmlentities($artpage -> find("div[id=article-body]", 0) -> plaintext, ENT_QUOTES, "UTF-8");
 
 foreach($cmtspage -> children() as $child)
 {
