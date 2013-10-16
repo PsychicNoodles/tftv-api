@@ -40,6 +40,7 @@ switch(strtolower($_GET["type"]))
 header("Content-Type: application/json");
 $url = "http://teamfortress.tv" . $type . $_GET["path"];
 $cmts = array();
+$title;
 for($i = 1; ; $i++)
 {
     $page = file_get_html($url . "/" . $i);
@@ -51,8 +52,10 @@ for($i = 1; ; $i++)
             header("Status: 404 Not Found");
             die("page not found");
         }
-        die(json_encode($cmts));
+        die(json_encode(array("Title" => $title, "Comments" => $cmts)));
     }
+    if($i == 1)
+        $title = trim($page -> find("title", 0) -> plaintext);
     foreach($page -> find("div[id=thread-container]", 0) -> children() as $child)
     {
         $item = array();
