@@ -64,7 +64,7 @@ foreach($cmtspage -> children() as $child)
     $item["Author Link"] = $child -> find("a", 2) -> href;
     $item["Flag"] = substr($child -> find("span", 1) -> class, 10, 2);
     $item["Stars"] = (int) substr($child -> find("span", 4) -> class, 5) + (int) substr($child -> find("span", 5) -> class, 5) + (int) substr($child -> find("span", 6) -> class, 5) + (int) substr($child -> find("span", 7) -> class, 5);
-    $item["Frags"] = trim($child -> find("[id=" . $child -> id . "]", 0) -> plaintext);
+    $item["Frags"] = trim(str_replace("&ndash;", "-", $child -> find("[id=" . $child -> id . "]", 0) -> plaintext));
     foreach($child -> find("div.post-footer", 0) -> children() as $e)
         $child -> find("div.post-footer", 0) -> innertext = str_replace($e -> outertext, "", $child -> find("div.post-footer", 0) -> innertext);
     if(strpos($child -> find("div.post-footer", 0) -> plaintext, "&sdot;") === FALSE)
