@@ -1,36 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="TFTV-Api : A RESTful JSON api for teamfortress.tv." />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>TFTV-Api by PsychicNoodles</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <title>TFTV-Api</title>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
-
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/PsychicNoodles/tftv-api">View on GitHub</a>
-
-          <h1 id="project_title">TFTV-Api</h1>
-          <h2 id="project_tagline">A RESTful JSON api for teamfortress.tv.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/PsychicNoodles/tftv-api/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/PsychicNoodles/tftv-api/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
+    <div class="wrapper">
+      <header>
+        <h1>TFTV-Api</h1>
+        <p>A RESTful JSON api for teamfortress.tv.</p>
+        <p class="view"><a href="https://github.com/PsychicNoodles/tftv-api">View the Project on GitHub <small>PsychicNoodles/tftv-api</small></a></p>
+        <ul>
+          <li><a href="https://github.com/PsychicNoodles/tftv-api/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/PsychicNoodles/tftv-api/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/PsychicNoodles/tftv-api">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
         <h4>
 <a name="tftv-api" class="anchor" href="#tftv-api"><span class="octicon octicon-link"></span></a>TFTV-Api</h4>
 
@@ -86,6 +82,19 @@
 <p>Parses content for a specific thread denoted by <code>thr</code>, which should be the part of the URL after teamfortress.tv/forum/thread/ (i.e.<a href="http://tftv-api.herokuapp.com/api/thread.php?thr=12566-its-coming">12566-its-coming</a> for <a href="http://teamfortress.tv/forum/thread/12566-its-coming">http://teamfortress.tv/forum/thread/12566-its-coming</a>). Provides ID, number in the thread, author name and profile link, flag, stars, frags, publish time/date, edited (null if not edited), and the body as raw (actual escaped html content) and plaintext (without html elements).</p>
 
 <h2>
+<a name="comments" class="anchor" href="#comments"><span class="octicon octicon-link"></span></a>Comments</h2>
+
+<pre><code>/api/comment.php?type=str&amp;path=url&amp;id=num
+</code></pre>
+
+<p>Parses content for a specific comment of the type <code>str</code> (article, forum/thread, schedule, or event), with the path <code>path</code>, and with the comment id <code>id</code>. See the documentation for <code>/api/thread.php</code> for info on what is returned, the only addition is the title of the parent post (i.e. the event title).</p>
+
+<pre><code>/api/commentlist.php?type=str&amp;path=url
+</code></pre>
+
+<p>Lists the comments in a specific thread of the type <code>str</code> (article, forum/thread, schedule, or event) with the path <code>path</code>.</p>
+
+<h2>
 <a name="servers" class="anchor" href="#servers"><span class="octicon octicon-link"></span></a>Servers</h2>
 
 <pre><code>/api/server.php[?type=str]
@@ -107,16 +116,11 @@
 <p>This project is the work of a single coder in his free time. If you find any bugs or errors, <strong>please do not hesitate to let me know!</strong> You can contact me at <a href="mailto:mattori.birnbaum@gmail.com">mattori.birnbaum@gmail.com</a> or on Steam at my username, <a href="http://steamcommunity.com/id/PsychicNoodles">PsychicNoodles</a>.</p>
       </section>
     </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">TFTV-Api maintained by <a href="https://github.com/PsychicNoodles">PsychicNoodles</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
+    <footer>
+      <p>Project maintained by <a href="https://github.com/PsychicNoodles">PsychicNoodles</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
-
   </body>
 </html>
